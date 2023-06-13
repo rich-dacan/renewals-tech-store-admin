@@ -1,11 +1,13 @@
 import NextAuth from "next-auth";
+import { MongoDBAdapter } from "@auth/mongodb-adapter";
 import GoogleProvider from "next-auth/providers/google";
+import clientPromise from "../../../../lib/mongodb";
 
 // import AppleProvider from 'next-auth/providers/apple'
 // import FacebookProvider from 'next-auth/providers/facebook'
 // import EmailProvider from 'next-auth/providers/email'
 
-export default NextAuth({
+export const authOptions = {
   providers: [
     // OAuth authentication providers...
     GoogleProvider({
@@ -26,4 +28,7 @@ export default NextAuth({
     //     from: 'NextAuth.js <no-reply@example.com>'
     //   }),
   ],
-});
+  adapter: MongoDBAdapter(clientPromise),
+};
+
+export default NextAuth(authOptions);
