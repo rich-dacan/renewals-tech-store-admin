@@ -1,5 +1,21 @@
 import { NextApiRequest, NextApiResponse } from "next";
 
-export default function handle(req: NextApiRequest, res: NextApiResponse) {
-  res.status(200).json(req.method);
+import mongoose from "mongoose";
+import clientPromise from "../../../../lib/mongodb";
+
+export default function createNewProduct(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
+  try {
+    const { method } = req;
+
+    mongoose.Promise = clientPromise;
+
+    if (method === "POST") {
+      res.status(200).json("post");
+    }
+  } catch (error) {
+    console.error(error);
+  }
 }

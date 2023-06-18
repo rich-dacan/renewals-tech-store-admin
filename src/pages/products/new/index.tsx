@@ -11,11 +11,12 @@ const NewProduct: React.FC = () => {
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [price, setPrice] = useState<string>("");
+  const [image, setImage] = useState<string>("");
 
   async function createProduct(event: { preventDefault: () => void }) {
     event.preventDefault();
 
-    const payload = { title, description, price };
+    const payload = { title, description, price, image };
 
     await axios.post("/api/products", payload);
   }
@@ -56,6 +57,13 @@ const NewProduct: React.FC = () => {
           placeholder="price"
           value={price}
           onChange={e => setPrice(e.target.value)}
+        />
+        <label>Product image</label>
+        <input
+          type="text"
+          placeholder="image"
+          value={image}
+          onChange={e => setImage(e.target.value)}
         />
 
         <button type="submit" className="btn-primary">
