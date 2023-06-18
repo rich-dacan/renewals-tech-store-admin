@@ -141,7 +141,7 @@ export const NavigationAside: React.FC<Props> = ({ session, signOut }) => {
           )}
 
           <button
-            className="text-white bg-yellow-700 p-2 rounded-lg h-10 ml-2"
+            className="text-white bg-yellow-700 p-2 rounded-lg h-10 ml-2 hover:bg-yellow-800"
             onClick={() => signOut()}
           >
             Sign out
