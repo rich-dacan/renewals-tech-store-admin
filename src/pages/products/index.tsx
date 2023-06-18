@@ -7,16 +7,26 @@ import { FiEdit } from "react-icons/fi";
 import { FaTrash } from "react-icons/fa";
 
 import axios from "axios";
+import Modal from "@/components/Modals/Modal";
 // import { ProductCard } from "@/components/Cards/ProductCard";
 
 const Products: React.FC = () => {
   const [products, setProducts] = useState<ProductProps[]>([]);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const openModal = () => {
+    setIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsOpen(false);
+  };
 
   useEffect(() => {
     axios.get("/api/products").then(res => setProducts(res.data));
   }, []);
 
-  console.log(products);
+  console.log(isOpen);
 
   return (
     <>
@@ -50,8 +60,14 @@ const Products: React.FC = () => {
                   {/* <td>{prod.image}</td> */}
                   <td>
                     <span className="flex justify-around items-center">
-                      <FiEdit style={{ cursor: "pointer" }} />{" "}
-                      <FaTrash style={{ cursor: "pointer" }} />
+                      <FiEdit
+                        onClick={openModal}
+                        style={{ cursor: "pointer" }}
+                      />{" "}
+                      <FaTrash
+                        onClick={openModal}
+                        style={{ cursor: "pointer" }}
+                      />
                     </span>
                   </td>
                 </tr>
@@ -59,20 +75,10 @@ const Products: React.FC = () => {
             </tbody>
           </table>
 
-          {/* <div className="flex-cols pt-8">
-            <h1 className="font-bold w-full text-center">All products</h1>
-            {products?.map(product => (
-              <div key={product.id} className="grid-cols-2">
-                <ProductCard
-                  id={product.id}
-                  title={product.title}
-                  description={product.description}
-                  price={product.price}
-                  image={product.image}
-                />
-              </div>
-            ))}
-          </div> */}
+          <Modal isOpen={isOpen} onClose={closeModal}>
+            <h1 className="text-lg font-bold mb-4">Modal Content</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          </Modal>
         </div>
       </Layout>
     </>
