@@ -1,10 +1,21 @@
+import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 
-export const NavbarAside: React.FC = () => {
+interface Props {
+  session?: SessionProps;
+  signOut: () => void;
+}
+
+export const NavigationAside: React.FC<Props> = ({ session, signOut }) => {
+  // const [activeLink, setActiveLink] = useState()
+
+  const inactiveLink = "flex p-2 ";
+  const activeLink = inactiveLink + "bg-white text-black rounded-l-lg";
+
   return (
-    <aside className="text-white p-4">
-      <Link href={"/"} className="flex mb-4">
+    <aside className="flex-col justify-between h-full text-white p-4 pr-0 bg-stone-800">
+      <Link href={"/"} className="flex mb-4 mr-4">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -22,7 +33,7 @@ export const NavbarAside: React.FC = () => {
         <span>Renewals admin</span>
       </Link>{" "}
       <nav className="flex flex-col gap-2">
-        <Link href={"/"} className="flex hover:bg-blue-500 p-2">
+        <Link href={"/"} className={activeLink}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -39,7 +50,7 @@ export const NavbarAside: React.FC = () => {
           </svg>
           Dashboard
         </Link>
-        <Link href={"/"} className="flex hover:bg-blue-500 p-2">
+        <Link href={"/products"} className={inactiveLink}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -56,7 +67,7 @@ export const NavbarAside: React.FC = () => {
           </svg>
           Products
         </Link>
-        <Link href={"/"} className="flex hover:bg-blue-500 p-2">
+        <Link href={"/orders"} className={inactiveLink}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -73,7 +84,7 @@ export const NavbarAside: React.FC = () => {
           </svg>
           Orders
         </Link>
-        <Link href={"/"} className="flex hover:bg-blue-500 p-2">
+        <Link href={"/settings"} className={inactiveLink}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -96,6 +107,29 @@ export const NavbarAside: React.FC = () => {
           Settings
         </Link>
       </nav>
+      <div className="flex-col">
+        <span className="flex">
+          {session && (
+            <Image
+              src={session?.user?.image ? session?.user?.image : ""}
+              width={50}
+              height={50}
+              alt={`profile picture of the user ${session?.user?.name}`}
+              priority
+              quality={100}
+              className="h-10 ml-2 rounded-lg"
+            />
+          )}
+
+          <button
+            className="text-white bg-yellow-700 p-2 rounded-lg h-10 ml-2"
+            onClick={() => signOut()}
+          >
+            Sign out
+          </button>
+        </span>
+        <p className="pb-1 text-white"> {session?.user?.name}</p>
+      </div>
     </aside>
   );
 };
