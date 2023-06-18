@@ -1,5 +1,4 @@
 import React, { ReactNode } from "react";
-import Image from "next/image";
 import { useSession, signIn, signOut } from "next-auth/react";
 
 import { NavigationAside } from "@/components/NavigationAside";
@@ -34,8 +33,6 @@ export const Layout: React.FC<Props> = ({ children }) => {
       <NavigationAside session={session} signOut={signOut} />
 
       <div className="bg-white h-screen flex flex-grow p-4 mt-2 mb-2 mr-2 rounded-lg">
-        {/* <p className="pb-1 text-black"> Hello, {session?.user?.name}!</p> */}
-
         {children}
       </div>
     </div>
