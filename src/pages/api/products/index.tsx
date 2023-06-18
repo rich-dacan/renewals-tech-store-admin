@@ -1,19 +1,28 @@
 import { NextApiRequest, NextApiResponse } from "next";
 
-import mongoose from "mongoose";
-import clientPromise from "../../../../lib/mongodb";
+import { Product } from "../../../../models/Product";
+import { mongooseConnect } from "../../../../lib/mongoose";
 
-export default function createNewProduct(
+export default async function createNewProduct(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   try {
     const { method } = req;
 
-    mongoose.Promise = clientPromise;
+    await mongooseConnect();
 
     if (method === "POST") {
-      res.status(200).json("post");
+      const { title, description, price, image } = req.body;
+
+      const newProduct = await Product.create({
+        title,
+        description,
+        price,
+        image,
+      });
+
+      res.status(200).json(newProduct);
     }
   } catch (error) {
     console.error(error);

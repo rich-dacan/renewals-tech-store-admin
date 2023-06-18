@@ -2,8 +2,9 @@ import React, { useState } from "react";
 
 import { TfiControlBackward } from "react-icons/tfi";
 import { Layout } from "@/components/Generals/Layout";
-import { useRouter } from "next/router";
+import { Router, useRouter } from "next/router";
 import axios from "axios";
+import { redirect } from "next/navigation";
 
 const NewProduct: React.FC = () => {
   const router = useRouter();
@@ -12,6 +13,7 @@ const NewProduct: React.FC = () => {
   const [description, setDescription] = useState<string>("");
   const [price, setPrice] = useState<string>("");
   const [image, setImage] = useState<string>("");
+  const [gotToProducts, setGoToProducts] = useState(false);
 
   async function createProduct(event: { preventDefault: () => void }) {
     event.preventDefault();
@@ -19,6 +21,12 @@ const NewProduct: React.FC = () => {
     const payload = { title, description, price, image };
 
     await axios.post("/api/products", payload);
+
+    setGoToProducts(true);
+  }
+
+  if (gotToProducts) {
+    router.push("/products");
   }
 
   return (
