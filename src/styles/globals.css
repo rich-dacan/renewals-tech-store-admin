@@ -18,6 +18,15 @@ input:focus, textarea:focus {
   @apply border-blue-500;
 }
 
+table.basic {
+  @apply w-full mt-4;
+}
+
+table.basic tr td {
+
+  @apply border border-yellow-800 p-1;
+}
+
 .btn-primary {
   @apply text-white bg-yellow-700 hover:bg-yellow-800 px-4 rounded-md
 }

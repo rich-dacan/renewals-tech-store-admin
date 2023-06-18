@@ -20,7 +20,10 @@ export const NavigationAside: React.FC<Props> = ({ session, signOut }) => {
 
   return (
     <aside className="flex-col min-w-max h-screen text-white p-4 pr-0 bg-stone-800">
-      <Link href={"/"} className="flex mb-4 mr-4">
+      <Link
+        href={"/"}
+        className="flex mb-4 mr-4 pb-2 border-b-4 border-yellow-700"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"

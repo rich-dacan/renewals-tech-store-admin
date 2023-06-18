@@ -12,6 +12,10 @@ export default async function createNewProduct(
 
     await mongooseConnect();
 
+    if (method === "GET") {
+      res.status(200).json(await Product.find());
+    }
+
     if (method === "POST") {
       const { title, description, price, image } = req.body;
 

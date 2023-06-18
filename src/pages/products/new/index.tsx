@@ -2,9 +2,9 @@ import React, { useState } from "react";
 
 import { TfiControlBackward } from "react-icons/tfi";
 import { Layout } from "@/components/Generals/Layout";
-import { Router, useRouter } from "next/router";
+import { useRouter } from "next/router";
 import axios from "axios";
-import { redirect } from "next/navigation";
+import Head from "next/head";
 
 const NewProduct: React.FC = () => {
   const router = useRouter();
@@ -30,55 +30,61 @@ const NewProduct: React.FC = () => {
   }
 
   return (
-    <Layout>
-      <form onSubmit={createProduct} className="w-full">
-        <span className="flex w-full justify-between items-center">
-          <h1>
-            <b>New product</b>
-          </h1>
+    <>
+      <Head>
+        <title>New product | Renewals Admin</title>
+        <meta name="og:title" property="og:title" content="Products" />
+      </Head>
+      <Layout>
+        <form onSubmit={createProduct} className="w-full">
+          <span className="flex w-full justify-between items-center">
+            <h1>
+              <b>New product</b>
+            </h1>
 
-          <button
-            onClick={router.back}
-            title="Back"
-            className="bg-yellow-700 text-white p-2 rounded-lg hover:bg-yellow-800"
-          >
-            <TfiControlBackward size={32} />
+            <button
+              onClick={router.back}
+              title="Back"
+              className="bg-yellow-700 text-white p-2 rounded-lg hover:bg-yellow-800"
+            >
+              <TfiControlBackward size={32} />
+            </button>
+          </span>
+
+          <label>Product name</label>
+          <input
+            type="text"
+            placeholder="product name"
+            value={title}
+            onChange={e => setTitle(e.target.value)}
+          />
+          <label>Product description</label>
+          <textarea
+            placeholder="description"
+            value={description}
+            onChange={e => setDescription(e.target.value)}
+          />
+          <label>Product price (in USD)</label>
+          <input
+            type="number"
+            placeholder="price"
+            value={price}
+            onChange={e => setPrice(e.target.value)}
+          />
+          <label>Product image</label>
+          <input
+            type="text"
+            placeholder="image"
+            value={image}
+            onChange={e => setImage(e.target.value)}
+          />
+
+          <button type="submit" className="btn-primary">
+            Save
           </button>
-        </span>
-
-        <label>Product name</label>
-        <input
-          type="text"
-          placeholder="product name"
-          value={title}
-          onChange={e => setTitle(e.target.value)}
-        />
-        <label>Product description</label>
-        <textarea
-          placeholder="description"
-          value={description}
-          onChange={e => setDescription(e.target.value)}
-        />
-        <label>Product price (in USD)</label>
-        <input
-          type="number"
-          placeholder="price"
-          value={price}
-          onChange={e => setPrice(e.target.value)}
-        />
-        <label>Product image</label>
-        <input
-          type="text"
-          placeholder="image"
-          value={image}
-          onChange={e => setImage(e.target.value)}
-        />
-
-        <button type="submit" className="btn-primary">
-          Save
-        </button>
-      </form>
-    </Layout>
+        </form>
+      </Layout>
+    </>
   );
 };
 
