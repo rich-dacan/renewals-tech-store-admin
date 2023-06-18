@@ -19,7 +19,7 @@ export const NavigationAside: React.FC<Props> = ({ session, signOut }) => {
   const { pathname } = router;
 
   return (
-    <aside className="flex-col justify-between h-full text-white p-4 pr-0 bg-stone-800">
+    <aside className="flex-col h-screen text-white p-4 pr-0 bg-stone-800">
       <Link href={"/"} className="flex mb-4 mr-4">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -126,7 +126,7 @@ export const NavigationAside: React.FC<Props> = ({ session, signOut }) => {
           Settings
         </Link>
       </nav>
-      <div className="flex-col justify-center m-3">
+      <div className="m-3">
         <span className="flex">
           {session && (
             <Image

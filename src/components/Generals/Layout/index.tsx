@@ -32,7 +32,7 @@ export const Layout: React.FC<Props> = ({ children }) => {
     <div className="flex min-h-screen bg-stone-800">
       <NavigationAside session={session} signOut={signOut} />
 
-      <div className="bg-white h-screen flex flex-grow p-4 mt-2 mb-2 mr-2 rounded-lg">
+      <div className="bg-white flex flex-grow p-4 mt-2 mb-2 mr-2 rounded-lg">
         {children}
       </div>
     </div>
