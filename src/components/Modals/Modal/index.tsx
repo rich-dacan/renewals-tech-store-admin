@@ -7,9 +7,15 @@ interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
   children: ReactNode;
+  noCloseBtn?: boolean;
 }
 
-const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
+const Modal: React.FC<ModalProps> = ({
+  isOpen,
+  onClose,
+  children,
+  noCloseBtn,
+}) => {
   const [isClient, setIsClient] = useState(false);
   const [element, setElement] = useState<HTMLDivElement>();
 
@@ -21,6 +27,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
   useEffect(() => {
     if (isOpen && isClient && element) {
       const modalRoot = document.getElementById("modal-root");
+
       if (modalRoot) {
         modalRoot.appendChild(element);
         document.body.style.overflow = "hidden";
@@ -64,13 +71,17 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
         className="fixed inset-0 bg-black opacity-75"
         onClick={handleOverlayClick}
       ></div>
+
       <div className="bg-white rounded-lg p-4 shadow-lg z-10">
-        <button
-          className="absolute top-2 right-2 text-gray-500 hover:text-gray-800"
-          onClick={onClose}
-        >
-          <AiOutlineCloseCircle className="h-6 w-6" />
-        </button>
+        {!noCloseBtn && (
+          <button
+            className="absolute top-2 right-2 text-gray-500 hover:text-gray-800"
+            onClick={onClose}
+          >
+            <AiOutlineCloseCircle className="h-6 w-6" />
+          </button>
+        )}
+
         {children}
       </div>
     </div>,

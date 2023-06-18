@@ -5,28 +5,26 @@ import Link from "next/link";
 import { Layout } from "@/components/Generals/Layout";
 import { FiEdit } from "react-icons/fi";
 import { FaTrash } from "react-icons/fa";
+import { BsDatabaseAdd } from "react-icons/bs";
 
 import axios from "axios";
 import Modal from "@/components/Modals/Modal";
+import NewProduct from "./new";
 // import { ProductCard } from "@/components/Cards/ProductCard";
 
 const Products: React.FC = () => {
   const [products, setProducts] = useState<ProductProps[]>([]);
-  const [isOpen, setIsOpen] = useState(false);
+  const [modalState, setModalState] = useState(false);
 
-  const openModal = () => {
-    setIsOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsOpen(false);
+  const handleModal = () => {
+    setModalState(!modalState);
   };
 
   useEffect(() => {
     axios.get("/api/products").then(res => setProducts(res.data));
-  }, []);
+  }, [products]);
 
-  console.log(isOpen);
+  // console.log(modalState);
 
   return (
     <>
@@ -37,12 +35,22 @@ const Products: React.FC = () => {
 
       <Layout>
         <div className="w-full">
-          <Link
-            href={"/products/new"}
-            className="text-white bg-yellow-700 rounded-lg p-2 hover:bg-yellow-800"
-          >
-            Add new product
-          </Link>
+          <span className="flex items-center justify-around w-full">
+            <Link
+              href={"/products/new"}
+              className="text-white bg-yellow-700 rounded-lg p-2 hover:bg-yellow-800"
+              title="Added new product in new page"
+            >
+              Add new product
+            </Link>
+
+            <BsDatabaseAdd
+              onClick={handleModal}
+              size={46}
+              style={{ cursor: "pointer" }}
+              title="Added new product with modal"
+            />
+          </span>
 
           <table className="basic">
             <thead className="bg-stone-800 text-white">
@@ -61,11 +69,11 @@ const Products: React.FC = () => {
                   <td>
                     <span className="flex justify-around items-center">
                       <FiEdit
-                        onClick={openModal}
+                        onClick={handleModal}
                         style={{ cursor: "pointer" }}
                       />{" "}
                       <FaTrash
-                        onClick={openModal}
+                        onClick={handleModal}
                         style={{ cursor: "pointer" }}
                       />
                     </span>
@@ -75,9 +83,8 @@ const Products: React.FC = () => {
             </tbody>
           </table>
 
-          <Modal isOpen={isOpen} onClose={closeModal}>
-            <h1 className="text-lg font-bold mb-4">Modal Content</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          <Modal isOpen={modalState} onClose={handleModal} noCloseBtn>
+            <NewProduct isModal onClose={handleModal} />
           </Modal>
         </div>
       </Layout>
