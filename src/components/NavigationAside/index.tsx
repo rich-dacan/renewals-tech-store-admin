@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 
 interface Props {
@@ -12,6 +13,10 @@ export const NavigationAside: React.FC<Props> = ({ session, signOut }) => {
 
   const inactiveLink = "flex p-2 ";
   const activeLink = inactiveLink + "bg-white text-black rounded-l-lg";
+
+  const router = useRouter();
+
+  const { pathname } = router;
 
   return (
     <aside className="flex-col justify-between h-full text-white p-4 pr-0 bg-stone-800">
@@ -33,7 +38,12 @@ export const NavigationAside: React.FC<Props> = ({ session, signOut }) => {
         <span>Renewals admin</span>
       </Link>{" "}
       <nav className="flex flex-col gap-2">
-        <Link href={"/"} className={activeLink}>
+        <Link
+          href={"/dashboard"}
+          className={
+            pathname.includes("/dashboard") ? activeLink : inactiveLink
+          }
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -50,7 +60,10 @@ export const NavigationAside: React.FC<Props> = ({ session, signOut }) => {
           </svg>
           Dashboard
         </Link>
-        <Link href={"/products"} className={inactiveLink}>
+        <Link
+          href={"/products"}
+          className={pathname.includes("/products") ? activeLink : inactiveLink}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -67,7 +80,10 @@ export const NavigationAside: React.FC<Props> = ({ session, signOut }) => {
           </svg>
           Products
         </Link>
-        <Link href={"/orders"} className={inactiveLink}>
+        <Link
+          href={"/orders"}
+          className={pathname.includes("/orders") ? activeLink : inactiveLink}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -84,7 +100,10 @@ export const NavigationAside: React.FC<Props> = ({ session, signOut }) => {
           </svg>
           Orders
         </Link>
-        <Link href={"/settings"} className={inactiveLink}>
+        <Link
+          href={"/settings"}
+          className={pathname.includes("/settings") ? activeLink : inactiveLink}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -107,7 +126,7 @@ export const NavigationAside: React.FC<Props> = ({ session, signOut }) => {
           Settings
         </Link>
       </nav>
-      <div className="flex-col">
+      <div className="flex-col justify-center m-3">
         <span className="flex">
           {session && (
             <Image
@@ -117,7 +136,7 @@ export const NavigationAside: React.FC<Props> = ({ session, signOut }) => {
               alt={`profile picture of the user ${session?.user?.name}`}
               priority
               quality={100}
-              className="h-10 ml-2 rounded-lg"
+              className="h-10 rounded-lg"
             />
           )}
 
@@ -128,7 +147,7 @@ export const NavigationAside: React.FC<Props> = ({ session, signOut }) => {
             Sign out
           </button>
         </span>
-        <p className="pb-1 text-white"> {session?.user?.name}</p>
+        <p className="pt-2 text-white"> {session?.user?.name}</p>
       </div>
     </aside>
   );

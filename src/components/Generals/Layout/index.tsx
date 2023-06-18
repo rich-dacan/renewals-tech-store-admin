@@ -10,7 +10,7 @@ interface Props {
 export const Layout: React.FC<Props> = ({ children }) => {
   const { data: session } = useSession();
 
-  console.log("session: ", session);
+  // console.log("session: ", session);
 
   if (!session) {
     return (
