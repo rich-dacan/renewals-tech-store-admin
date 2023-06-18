@@ -19,7 +19,7 @@ export const NavigationAside: React.FC<Props> = ({ session, signOut }) => {
   const { pathname } = router;
 
   return (
-    <aside className="flex-col h-screen text-white p-4 pr-0 bg-stone-800">
+    <aside className="flex-col min-w-max h-screen text-white p-4 pr-0 bg-stone-800">
       <Link href={"/"} className="flex mb-4 mr-4">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -143,6 +143,7 @@ export const NavigationAside: React.FC<Props> = ({ session, signOut }) => {
           <button
             className="text-white bg-yellow-700 p-2 rounded-lg h-10 ml-2 hover:bg-yellow-800"
             onClick={() => signOut()}
+            title="Sign-out"
           >
             Sign out
           </button>

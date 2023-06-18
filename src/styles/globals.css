@@ -2,7 +2,47 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
+h1 {
+  @apply mb-2 text-xl;
+}
+
+label {
+  @apply text-yellow-800
+}
+
+input, textarea {
+  @apply border border-yellow-700 rounded-md px-1 w-full;
+  @apply mb-2;
+}
+input:focus, textarea:focus {
+  @apply border-blue-500;
+}
+
+.btn-primary {
+  @apply text-white bg-yellow-700 hover:bg-yellow-800 px-4 rounded-md
+}
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+
+/* :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
@@ -24,24 +64,4 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
-}
-
-/* width */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #888;
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
+} */

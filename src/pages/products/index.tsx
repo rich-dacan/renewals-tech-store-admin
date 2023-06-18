@@ -12,9 +12,14 @@ const Products: React.FC = () => {
       </Head>
 
       <Layout>
-        <Link href={"/products/new"} className="bg-yellow-700 h-6">
-          Add new product
-        </Link>
+        <div>
+          <Link
+            href={"/products/new"}
+            className="text-white bg-yellow-700 rounded-lg p-2"
+          >
+            Add new product
+          </Link>
+        </div>
       </Layout>
     </>
   );
