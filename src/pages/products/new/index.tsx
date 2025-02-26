@@ -10,6 +10,7 @@ import { AiOutlineCloseCircle } from "react-icons/ai";
 interface Props {
   isModal?: boolean;
   onClose: () => void;
+  onSubmitted?: boolean;
 }
 
 const NewProduct: React.FC<Props> = ({ isModal = false, onClose }) => {
@@ -19,7 +20,6 @@ const NewProduct: React.FC<Props> = ({ isModal = false, onClose }) => {
   const [description, setDescription] = useState<string>("");
   const [price, setPrice] = useState<string>("");
   const [image, setImage] = useState<string>("");
-  const [gotToProducts, setGoToProducts] = useState(false);
 
   async function createProduct(event: { preventDefault: () => void }) {
     event.preventDefault();
@@ -28,11 +28,11 @@ const NewProduct: React.FC<Props> = ({ isModal = false, onClose }) => {
 
     await axios.post("/api/products", payload);
 
-    setGoToProducts(true);
-  }
-
-  if (gotToProducts) {
-    router.push("/products");
+    if (isModal) {
+      onClose();
+    } else {
+      router.push("/products");
+    }
   }
 
   return (

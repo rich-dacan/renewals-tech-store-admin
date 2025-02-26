@@ -1,5 +1,4 @@
 import { NextApiRequest, NextApiResponse } from "next";
-
 import { Product } from "../../../../models/Product";
 import { mongooseConnect } from "../../../../lib/mongoose";
 

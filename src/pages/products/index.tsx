@@ -24,8 +24,6 @@ const Products: React.FC = () => {
     axios.get("/api/products").then(res => setProducts(res.data));
   }, [products]);
 
-  // console.log(modalState);
-
   return (
     <>
       <Head>
@@ -44,12 +42,11 @@ const Products: React.FC = () => {
               Add new product
             </Link>
 
-            <BsDatabaseAdd
+            <button
+              className="bg-yellow-700 text-white rounded-lg p-2 hover:bg-yellow-800"
               onClick={handleModal}
-              size={46}
-              style={{ cursor: "pointer" }}
-              title="Added new product with modal"
-            />
+              title="Add new product with modal"
+            >Add new product with modal</button>
           </span>
 
           <table className="basic">
@@ -83,7 +80,7 @@ const Products: React.FC = () => {
             </tbody>
           </table>
 
-          <Modal isOpen={modalState} onClose={handleModal} noCloseBtn>
+          <Modal isOpen={modalState} onClose={handleModal}>
             <NewProduct isModal onClose={handleModal} />
           </Modal>
         </div>

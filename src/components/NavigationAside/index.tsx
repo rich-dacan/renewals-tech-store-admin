@@ -9,20 +9,19 @@ interface Props {
 }
 
 export const NavigationAside: React.FC<Props> = ({ session, signOut }) => {
-  // const [activeLink, setActiveLink] = useState()
 
-  const inactiveLink = "flex p-2 ";
-  const activeLink = inactiveLink + "bg-white text-black rounded-l-lg";
+  const inactiveLink = "flex p-2 rounded-lg hover:bg-yellow-700 hover:text-white";
+  const activeLink =  "flex p-2 rounded-lg bg-white text-black hover:bg-yellow-700 hover:text-white";
 
   const router = useRouter();
 
   const { pathname } = router;
 
   return (
-    <aside className="flex-col min-w-max h-screen text-white p-4 pr-0 bg-stone-800">
+    <aside className="flex-col min-w-max h-screen  text-white p-4 bg-stone-800">
       <Link
         href={"/"}
-        className="flex mb-4 mr-4 pb-2 border-b-4 border-yellow-700"
+        className="flex mb-4 mr-4 pb-2 border-b-4 border-yellow-700 "
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -129,9 +128,11 @@ export const NavigationAside: React.FC<Props> = ({ session, signOut }) => {
           Settings
         </Link>
       </nav>
-      <div className="m-3">
-        <span className="flex">
+      <div className="mt-auto">
+        <hr className="border-t-2 border-yellow-700" />
+        <span className="flex-col ">
           {session && (
+           <span className="flex py-4">
             <Image
               src={session?.user?.image ? session?.user?.image : ""}
               width={50}
@@ -141,17 +142,18 @@ export const NavigationAside: React.FC<Props> = ({ session, signOut }) => {
               quality={100}
               className="h-10 rounded-lg"
             />
+            <p className="pt-2 text-white">{session?.user?.name}</p>
+          </span>
           )}
 
           <button
-            className="text-white bg-yellow-700 p-2 rounded-lg h-10 ml-2 hover:bg-yellow-800"
+            className="w-full text-white bg-yellow-700 rounded-lg p-2 px-3 hover:bg-yellow-800"
             onClick={() => signOut()}
             title="Sign-out"
           >
             Sign out
           </button>
         </span>
-        <p className="pt-2 text-white"> {session?.user?.name}</p>
       </div>
     </aside>
   );

@@ -8,29 +8,32 @@ interface Props {
 }
 
 export const Layout: React.FC<Props> = ({ children }) => {
-  const { data: session } = useSession();
+  // const { data: session } = useSession();
 
   // console.log("session: ", session);
 
-  if (!session) {
-    return (
-      <div className="bg-slate-900 w-screen h-screen flex items-center">
-        <div className="text-center text-white w-full">
-          Not signed in <br />
-          <button
-            onClick={() => signIn("google")}
-            className="bg-gray-600 p-2 rounded-lg"
-          >
-            Login with Google
-          </button>
-        </div>
-      </div>
-    );
-  }
+  // if (!session) {
+  //   return (
+  //     <div className="bg-slate-900 w-screen h-screen flex items-center">
+  //       <div className="text-center text-white w-full">
+  //         Not signed in <br />
+  //         <button
+  //           onClick={() => signIn("google")}
+  //           className="bg-gray-600 p-2 rounded-lg"
+  //         >
+  //           Login with Google
+  //         </button>
+  //       </div>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="flex min-h-screen bg-stone-800">
-      <NavigationAside session={session} signOut={signOut} />
+      {/* <NavigationAside session={session} signOut={signOut} /> */}
+
+      <NavigationAside signOut={signOut} />
+
 
       <div className="bg-white flex flex-grow p-4 mt-2 mb-2 mr-2 rounded-lg">
         {children}
