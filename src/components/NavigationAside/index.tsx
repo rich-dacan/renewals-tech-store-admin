@@ -18,7 +18,7 @@ export const NavigationAside: React.FC<Props> = ({ session, signOut }) => {
   const { pathname } = router;
 
   return (
-    <aside className="flex-col min-w-max h-screen  text-white p-4 bg-stone-800">
+    <aside className="flex flex-col min-w-max h-screen  text-white p-4 bg-stone-800">
       <Link
         href={"/"}
         className="flex mb-4 mr-4 pb-2 border-b-4 border-yellow-700 "
@@ -39,7 +39,7 @@ export const NavigationAside: React.FC<Props> = ({ session, signOut }) => {
         </svg>
         <span>Renewals admin</span>
       </Link>{" "}
-      <nav className="flex flex-col gap-2">
+      <nav className="flex flex-col gap-2 flex-grow">
         <Link
           href={"/dashboard"}
           className={
@@ -129,7 +129,7 @@ export const NavigationAside: React.FC<Props> = ({ session, signOut }) => {
         </Link>
       </nav>
       <div className="mt-auto">
-        <hr className="border-t-2 border-yellow-700" />
+        {/* <hr className="border-t-2 border-yellow-700" /> */}
         <span className="flex-col ">
           {session && (
            <span className="flex py-4">
@@ -147,7 +147,7 @@ export const NavigationAside: React.FC<Props> = ({ session, signOut }) => {
           )}
 
           <button
-            className="w-full text-white bg-yellow-700 rounded-lg p-2 px-3 hover:bg-yellow-800"
+            className="w-full text-white bg-yellow-700 rounded-lg p-2 px-3 mt-2 hover:bg-yellow-800"
             onClick={() => signOut()}
             title="Sign-out"
           >

@@ -12,6 +12,12 @@ import Modal from "@/components/Modals/Modal";
 import NewProduct from "./new";
 // import { ProductCard } from "@/components/Cards/ProductCard";
 
+interface ProductProps {
+  _id: string;
+  title: string;
+  price: number;
+}
+
 const Products: React.FC = () => {
   const [products, setProducts] = useState<ProductProps[]>([]);
   const [modalState, setModalState] = useState(false);
@@ -24,6 +30,8 @@ const Products: React.FC = () => {
     axios.get("/api/products").then(res => setProducts(res.data));
   }, [products]);
 
+  console.log("products: ", products);
+
   return (
     <>
       <Head>
@@ -33,7 +41,7 @@ const Products: React.FC = () => {
 
       <Layout>
         <div className="w-full">
-          <span className="flex items-center justify-around w-full">
+          <span className="flex items-center justify-between w-full">
             <Link
               href={"/products/new"}
               className="text-white bg-yellow-700 rounded-lg p-2 hover:bg-yellow-800"
@@ -54,24 +62,28 @@ const Products: React.FC = () => {
               <tr>
                 <td>Product name</td>
                 <td>Price</td>
-                <td>Action</td>
+                <td>Actions</td>
               </tr>
             </thead>
             <tbody>
               {products.map(prod => (
-                <tr key={prod.id}>
+                <tr key={prod._id}>
                   <td>{prod.title}</td>
                   <td>{prod.price}</td>
                   {/* <td>{prod.image}</td> */}
                   <td>
                     <span className="flex justify-around items-center">
-                      <FiEdit
-                        onClick={handleModal}
-                        style={{ cursor: "pointer" }}
-                      />{" "}
+                      <Link
+                        href={`/products/edit/${prod._id}`}
+                        className="hover:text-yellow-700 cursor-pointer"
+                      >
+                        <FiEdit
+                        // onClick={handleModal}
+                      />
+                      </Link>
                       <FaTrash
+                        className="hover:text-yellow-700 cursor-pointer"
                         onClick={handleModal}
-                        style={{ cursor: "pointer" }}
                       />
                     </span>
                   </td>

@@ -12,7 +12,11 @@ export default async function createNewProduct(
     await mongooseConnect();
 
     if (method === "GET") {
-      res.status(200).json(await Product.find());
+      if (req.query?.id) {
+        res.json(await Product.findOne({_id: req.query?.id}));
+      } else {
+        res.status(200).json(await Product.find());
+      }
     }
 
     if (method === "POST") {

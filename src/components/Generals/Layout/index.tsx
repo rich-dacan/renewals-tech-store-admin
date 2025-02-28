@@ -34,8 +34,7 @@ export const Layout: React.FC<Props> = ({ children }) => {
 
       <NavigationAside signOut={signOut} />
 
-
-      <div className="bg-white flex flex-grow p-4 mt-2 mb-2 mr-2 rounded-lg">
+      <div className="bg-white flex flex-grow p-10 mt-2 mb-2 mr-2 rounded-lg">
         {children}
       </div>
     </div>

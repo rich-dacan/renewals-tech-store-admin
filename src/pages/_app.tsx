@@ -9,6 +9,7 @@ export default function App({
   pageProps: { session, ...pageProps },
 }: AppProps) {
   return (
+    // Auth deactivation
     // <SessionProvider session={session}>
       <Component {...pageProps} />
     // </SessionProvider>
